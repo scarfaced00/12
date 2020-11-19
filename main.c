@@ -4,18 +4,25 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
-	FILE *fp;
-	char str[100];
-	fp=fopen("simple.txt","r");
-	if (fp==NULL)
-		return -1;
-	
-	while(fgets(str,100,fp)!=NULL)
-		{
-			printf("%s",str);
+	FILE *fp = NULL;
+	char name[20];
+	char word[20];
+	char line[100];
+	printf("original file name :");
+	scanf("%s", name);
+	printf("word to find :");
+	scanf("%s", word);
+	fp = fopen(name, "r");
+	printf("find a word %s\n",word);
+	while (fgets(line, sizeof(line), fp) != NULL)
+	{
+		if (strncmp(line, word, strlen(word)) == 0)
+			{
+			printf("Search done!");
+			break;
 		}
-		
-		fclose(fp);
-		
-		return 0;
+		else
+			printf("Search failed!");
 	}
+	return 0;
+}
